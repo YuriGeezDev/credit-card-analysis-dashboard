@@ -53,6 +53,9 @@ credit-card-default-dashboard.SemanticModel/  ← data model (tables, relationsh
 - `Top50OverduePayments` — top 50 individual overdue records (client-month rows) by outstanding amount
 - `DimClient` / `DimEducation` — supporting dimensions for the slicers (client names and education level)
 
+<img width="1115" height="587" alt="image" src="https://github.com/user-attachments/assets/584750c4-e3f0-474d-aa5a-d7fe63801e29" />
+
+
 ## Credits
 
 Original dataset: Yeh, I-Cheng (2009). *Default of Credit Card Clients Dataset*. UCI Machine Learning Repository. Published on Kaggle by user `uciml` under CC BY 4.0 license.
