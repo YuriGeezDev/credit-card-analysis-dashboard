@@ -1,0 +1,91 @@
+table Top50OverduePayments
+	lineageTag: fbaf1997-d374-4022-914a-3bb5cd4c04af
+
+	column ClientID
+		dataType: int64
+		formatString: 0
+		lineageTag: 794e66a4-a1ba-4fff-83e5-3b2973bfe427
+		summarizeBy: none
+		sourceColumn: ClientID
+
+	column ClientName
+		dataType: string
+		lineageTag: b68c3a97-1a50-4ec2-8bca-e47d9b97dac1
+		summarizeBy: none
+		sourceColumn: ClientName
+
+	column EDUCATION
+		dataType: int64
+		formatString: 0
+		lineageTag: ab7a718d-4eb9-456b-ac0e-ac685a853944
+		summarizeBy: none
+		sourceColumn: EDUCATION
+
+	column MonthNumber
+		dataType: int64
+		formatString: 0
+		lineageTag: 0cb2b8ea-29a4-4534-8a10-e7da12813273
+		summarizeBy: none
+		sourceColumn: MonthNumber
+
+	column MonthLabel
+		dataType: string
+		lineageTag: 51fcafc5-497e-49e9-8424-1bf3e9bc402b
+		summarizeBy: none
+		sourceColumn: MonthLabel
+
+	column ReferenceMonth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: bba22249-5a68-4e92-844a-6f34ca59d9b4
+		summarizeBy: none
+		sourceColumn: ReferenceMonth
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column PaymentStatus
+		dataType: int64
+		formatString: 0
+		lineageTag: 75e21c3f-0621-492c-a0e4-9e1c1bd0ab40
+		summarizeBy: none
+		sourceColumn: PaymentStatus
+
+	column BillAmount
+		dataType: double
+		formatString: "NT$" #,##0
+		lineageTag: 6f27f852-1b2f-4f4a-9abb-372e5a1b54e7
+		summarizeBy: sum
+		sourceColumn: BillAmount
+
+	column PaidAmount
+		dataType: double
+		formatString: "NT$" #,##0
+		lineageTag: a738cb8f-9c19-43a0-8593-3fc2478d7fe5
+		summarizeBy: sum
+		sourceColumn: PaidAmount
+
+	column DaysLate
+		dataType: int64
+		formatString: 0
+		lineageTag: 34ed7855-959c-4f07-ad3f-b113db9bda0a
+		summarizeBy: sum
+		sourceColumn: DaysLate
+
+	column OutstandingAmount
+		dataType: double
+		formatString: "NT$" #,##0
+		lineageTag: f7a9a4ba-0abd-4c51-b202-7bf220c5c9e7
+		summarizeBy: sum
+		sourceColumn: OutstandingAmount
+
+	partition Top50OverduePayments = m
+		mode: import
+		source =
+				let
+				    Sorted = Table.Sort(OverduePayments, {{"OutstandingAmount", Order.Descending}}),
+				    Top50 = Table.FirstN(Sorted, 50)
+				in
+				    Top50
+
+	annotation PBI_ResultType = Table
+

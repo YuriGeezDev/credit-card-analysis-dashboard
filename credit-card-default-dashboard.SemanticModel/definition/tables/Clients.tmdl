@@ -1,0 +1,202 @@
+table Clients
+	lineageTag: 49334660-d8a0-46d4-ae14-fb6c4452417e
+
+	measure 'Actual Default Rate (%)' = DIVIDE(SUM(Clients[DEFAULT_NEXT_MONTH]), COUNTROWS(Clients))
+		formatString: 0.0%
+		lineageTag: 861fa344-8e85-4e22-88df-607accd1508f
+
+	column ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 5a3a1c0e-08c8-4dff-b201-36d5a7e40c59
+		summarizeBy: none
+		sourceColumn: ID
+
+	column LIMIT_BAL
+		dataType: double
+		formatString: "NT$" #,##0
+		lineageTag: f7bdb724-5b78-4ef7-a4c7-e8a47e6e28ed
+		summarizeBy: none
+		sourceColumn: LIMIT_BAL
+
+	column SEX
+		dataType: int64
+		formatString: 0
+		lineageTag: 9acc1309-6adf-41c6-8a76-152df3b199b7
+		summarizeBy: none
+		sourceColumn: SEX
+
+	column EDUCATION
+		dataType: int64
+		formatString: 0
+		lineageTag: 7d92ec92-909d-40ef-bbee-34ca1ff72eaf
+		summarizeBy: none
+		sourceColumn: EDUCATION
+
+	column MARRIAGE
+		dataType: int64
+		formatString: 0
+		lineageTag: f8a815dc-2876-42a5-b2f7-5fab6c569911
+		summarizeBy: none
+		sourceColumn: MARRIAGE
+
+	column AGE
+		dataType: int64
+		formatString: 0
+		lineageTag: 24ae5987-390c-4980-8509-2002b040d147
+		summarizeBy: none
+		sourceColumn: AGE
+
+	column PAY_0
+		dataType: int64
+		formatString: 0
+		lineageTag: 44927a61-66f3-4c49-b877-afc7e87c23a8
+		summarizeBy: none
+		sourceColumn: PAY_0
+
+	column PAY_2
+		dataType: int64
+		formatString: 0
+		lineageTag: 7a83b402-cbca-4be5-9983-d0463271a2fe
+		summarizeBy: none
+		sourceColumn: PAY_2
+
+	column PAY_3
+		dataType: int64
+		formatString: 0
+		lineageTag: 7958188a-364a-4c81-baae-e33aa600cba4
+		summarizeBy: none
+		sourceColumn: PAY_3
+
+	column PAY_4
+		dataType: int64
+		formatString: 0
+		lineageTag: 669ce9b0-7e2f-4651-bbb2-d958b7ad4188
+		summarizeBy: none
+		sourceColumn: PAY_4
+
+	column PAY_5
+		dataType: int64
+		formatString: 0
+		lineageTag: 0e7b5536-faa2-4fad-830a-790f90b8f8d0
+		summarizeBy: none
+		sourceColumn: PAY_5
+
+	column PAY_6
+		dataType: int64
+		formatString: 0
+		lineageTag: dc43fa06-093b-4f79-9ac5-1e60482b1f24
+		summarizeBy: none
+		sourceColumn: PAY_6
+
+	column BILL_AMT1
+		dataType: double
+		formatString: "NT$" #,##0
+		lineageTag: 391a9074-25f9-4b44-9078-b991de560b31
+		summarizeBy: none
+		sourceColumn: BILL_AMT1
+
+	column BILL_AMT2
+		dataType: double
+		formatString: "NT$" #,##0
+		lineageTag: 21bdef52-adb0-4bc9-8f5c-c20d29a739f4
+		summarizeBy: none
+		sourceColumn: BILL_AMT2
+
+	column BILL_AMT3
+		dataType: double
+		formatString: "NT$" #,##0
+		lineageTag: e81a38bd-fd94-40b5-b5c9-d8592251d365
+		summarizeBy: none
+		sourceColumn: BILL_AMT3
+
+	column BILL_AMT4
+		dataType: double
+		formatString: "NT$" #,##0
+		lineageTag: 09943366-1b31-48be-98f5-671982ba72d9
+		summarizeBy: none
+		sourceColumn: BILL_AMT4
+
+	column BILL_AMT5
+		dataType: double
+		formatString: "NT$" #,##0
+		lineageTag: b59f7193-5f3d-4765-8750-b57f3413ce9e
+		summarizeBy: none
+		sourceColumn: BILL_AMT5
+
+	column BILL_AMT6
+		dataType: double
+		formatString: "NT$" #,##0
+		lineageTag: b10f95ff-c85a-4a90-899a-0817dd9bc59f
+		summarizeBy: none
+		sourceColumn: BILL_AMT6
+
+	column PAY_AMT1
+		dataType: double
+		formatString: "NT$" #,##0
+		lineageTag: c48c17f4-8257-4a4d-8cf7-c630ae28d8e5
+		summarizeBy: none
+		sourceColumn: PAY_AMT1
+
+	column PAY_AMT2
+		dataType: double
+		formatString: "NT$" #,##0
+		lineageTag: e1423380-75b4-4c13-b45b-9cf78f4c6d8f
+		summarizeBy: none
+		sourceColumn: PAY_AMT2
+
+	column PAY_AMT3
+		dataType: double
+		formatString: "NT$" #,##0
+		lineageTag: 5306a671-ea8b-4364-b685-89fed3a8420c
+		summarizeBy: none
+		sourceColumn: PAY_AMT3
+
+	column PAY_AMT4
+		dataType: double
+		formatString: "NT$" #,##0
+		lineageTag: 03a072e9-408e-46aa-bab1-a3ffbe2bb425
+		summarizeBy: none
+		sourceColumn: PAY_AMT4
+
+	column PAY_AMT5
+		dataType: double
+		formatString: "NT$" #,##0
+		lineageTag: f1c1c96d-15f8-48cf-94df-19786843f92c
+		summarizeBy: none
+		sourceColumn: PAY_AMT5
+
+	column PAY_AMT6
+		dataType: double
+		formatString: "NT$" #,##0
+		lineageTag: 845dbc86-8a65-4da0-b8ba-0d46beeedf6b
+		summarizeBy: none
+		sourceColumn: PAY_AMT6
+
+	column DEFAULT_NEXT_MONTH
+		dataType: int64
+		formatString: 0
+		lineageTag: e03471d7-fb95-481b-9abf-a74b2d11cc48
+		summarizeBy: none
+		sourceColumn: DEFAULT_NEXT_MONTH
+
+	partition Clients = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(ProjectFolder & "\data\default_of_credit_card_clients.csv"), [Delimiter=",", Columns=25, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    PromotedHeaders = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    ChangedTypes = Table.TransformColumnTypes(PromotedHeaders, {
+				        {"ID", Int64.Type}, {"LIMIT_BAL", type number}, {"SEX", Int64.Type}, {"EDUCATION", Int64.Type},
+				        {"MARRIAGE", Int64.Type}, {"AGE", Int64.Type},
+				        {"PAY_0", Int64.Type}, {"PAY_2", Int64.Type}, {"PAY_3", Int64.Type}, {"PAY_4", Int64.Type}, {"PAY_5", Int64.Type}, {"PAY_6", Int64.Type},
+				        {"BILL_AMT1", type number}, {"BILL_AMT2", type number}, {"BILL_AMT3", type number}, {"BILL_AMT4", type number}, {"BILL_AMT5", type number}, {"BILL_AMT6", type number},
+				        {"PAY_AMT1", type number}, {"PAY_AMT2", type number}, {"PAY_AMT3", type number}, {"PAY_AMT4", type number}, {"PAY_AMT5", type number}, {"PAY_AMT6", type number},
+				        {"default payment next month", Int64.Type}
+				    }),
+				    Renamed = Table.RenameColumns(ChangedTypes, {{"default payment next month", "DEFAULT_NEXT_MONTH"}})
+				in
+				    Renamed
+
+	annotation PBI_ResultType = Table
+

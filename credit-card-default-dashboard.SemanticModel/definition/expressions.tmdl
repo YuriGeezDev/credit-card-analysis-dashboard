@@ -1,0 +1,6 @@
+expression ProjectFolder = "C:\Users\yuri.batista\Desktop\credit-card-default-dashboard" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: ee7bd2ab-c81b-402e-a6c8-bb54c9a75aee
+
+	annotation PBI_ResultType = Text
+
+	annotation PBI_NavigationStepName = Navigation

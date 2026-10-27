@@ -1,0 +1,35 @@
+table DimEducation
+	lineageTag: 1ffbd4a6-5c13-411f-a6f4-29eefa019620
+
+	column EDUCATION
+		dataType: string
+		lineageTag: c6959539-a43a-439e-9a14-34b89aa2b6ce
+		summarizeBy: none
+		sourceColumn: EDUCATION
+
+		annotation SummarizationSetBy = Automatic
+
+	column EducationLevel
+		dataType: string
+		lineageTag: 94a1ad66-2a9d-4e42-80ac-095c52f2c0ac
+		sourceColumn: EducationLevel
+
+	partition DimEducation = m
+		mode: import
+		source =
+				let
+				    Source = #table(
+				        {"EDUCATION", "EducationLevel"},
+				        {
+				            {1, "Graduate School"},
+				            {2, "University"},
+				            {3, "High School"},
+				            {4, "Other"},
+				            {5, "Unknown"},
+				            {6, "Unknown"},
+				            {0, "Unknown"}
+				        }
+				    )
+				in
+				    Source
+

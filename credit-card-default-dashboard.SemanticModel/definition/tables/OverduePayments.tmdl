@@ -1,0 +1,134 @@
+table OverduePayments
+	lineageTag: ed6a577c-8e30-4a24-9852-1c5eee703391
+
+	column ClientID
+		dataType: int64
+		formatString: 0
+		lineageTag: b2a17f2b-324d-4ac0-b067-f9604547a100
+		summarizeBy: none
+		sourceColumn: ClientID
+
+	column ClientName
+		dataType: string
+		lineageTag: f4dbff5a-a8e1-4066-90f7-2fa56b9dcbc6
+		summarizeBy: none
+		sourceColumn: ClientName
+
+	column EDUCATION
+		dataType: int64
+		formatString: 0
+		lineageTag: 4f868013-ce3c-492f-b483-a1df392b1268
+		summarizeBy: none
+		sourceColumn: EDUCATION
+
+	column MonthNumber
+		dataType: int64
+		formatString: 0
+		lineageTag: 89eba712-8604-41fa-ae5b-e99b4eefcb12
+		summarizeBy: none
+		sourceColumn: MonthNumber
+
+	column MonthLabel
+		dataType: string
+		lineageTag: 22fa7675-ae5c-4fe3-8ef4-a380c98b2938
+		summarizeBy: none
+		sourceColumn: MonthLabel
+
+	column ReferenceMonth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5ee2b3d9-1c95-42b3-a8c1-8ee081dae4a5
+		summarizeBy: none
+		sourceColumn: ReferenceMonth
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column PaymentStatus
+		dataType: int64
+		formatString: 0
+		lineageTag: f7c79042-7201-440d-9a19-e3922b9a97a0
+		summarizeBy: none
+		sourceColumn: PaymentStatus
+
+	column BillAmount
+		dataType: double
+		formatString: "NT$" #,##0
+		lineageTag: db37b4cd-1126-4770-a4ce-d48db914ba65
+		summarizeBy: sum
+		sourceColumn: BillAmount
+
+	column PaidAmount
+		dataType: double
+		formatString: "NT$" #,##0
+		lineageTag: ab0e8af0-0154-4b78-b710-31eabd043147
+		summarizeBy: sum
+		sourceColumn: PaidAmount
+
+	column DaysLate
+		dataType: int64
+		formatString: 0
+		lineageTag: 618f0648-2a58-42f0-9676-590120d73e50
+		summarizeBy: sum
+		sourceColumn: DaysLate
+
+	column OutstandingAmount
+		dataType: double
+		formatString: "NT$" #,##0
+		lineageTag: 2df0d7dc-95ea-448f-949c-52414038f6e0
+		summarizeBy: sum
+		sourceColumn: OutstandingAmount
+
+	partition OverduePayments = m
+		mode: import
+		source =
+				let
+				    Base = Clients,
+				
+				    Month1 = Table.RenameColumns(
+				        Table.SelectColumns(Base, {"ID", "EDUCATION", "PAY_0", "BILL_AMT1", "PAY_AMT1"}),
+				        {{"PAY_0", "PaymentStatus"}, {"BILL_AMT1", "BillAmount"}, {"PAY_AMT1", "PaidAmount"}}
+				    ),
+				    Month1Tagged = Table.AddColumn(Table.AddColumn(Table.AddColumn(Month1, "MonthNumber", each 1, Int64.Type), "MonthLabel", each "September/2005", type text), "ReferenceMonth", each #date(2005, 9, 1), type date),
+				
+				    Month2 = Table.RenameColumns(
+				        Table.SelectColumns(Base, {"ID", "EDUCATION", "PAY_2", "BILL_AMT2", "PAY_AMT2"}),
+				        {{"PAY_2", "PaymentStatus"}, {"BILL_AMT2", "BillAmount"}, {"PAY_AMT2", "PaidAmount"}}
+				    ),
+				    Month2Tagged = Table.AddColumn(Table.AddColumn(Table.AddColumn(Month2, "MonthNumber", each 2, Int64.Type), "MonthLabel", each "August/2005", type text), "ReferenceMonth", each #date(2005, 8, 1), type date),
+				
+				    Month3 = Table.RenameColumns(
+				        Table.SelectColumns(Base, {"ID", "EDUCATION", "PAY_3", "BILL_AMT3", "PAY_AMT3"}),
+				        {{"PAY_3", "PaymentStatus"}, {"BILL_AMT3", "BillAmount"}, {"PAY_AMT3", "PaidAmount"}}
+				    ),
+				    Month3Tagged = Table.AddColumn(Table.AddColumn(Table.AddColumn(Month3, "MonthNumber", each 3, Int64.Type), "MonthLabel", each "July/2005", type text), "ReferenceMonth", each #date(2005, 7, 1), type date),
+				
+				    Month4 = Table.RenameColumns(
+				        Table.SelectColumns(Base, {"ID", "EDUCATION", "PAY_4", "BILL_AMT4", "PAY_AMT4"}),
+				        {{"PAY_4", "PaymentStatus"}, {"BILL_AMT4", "BillAmount"}, {"PAY_AMT4", "PaidAmount"}}
+				    ),
+				    Month4Tagged = Table.AddColumn(Table.AddColumn(Table.AddColumn(Month4, "MonthNumber", each 4, Int64.Type), "MonthLabel", each "June/2005", type text), "ReferenceMonth", each #date(2005, 6, 1), type date),
+				
+				    Month5 = Table.RenameColumns(
+				        Table.SelectColumns(Base, {"ID", "EDUCATION", "PAY_5", "BILL_AMT5", "PAY_AMT5"}),
+				        {{"PAY_5", "PaymentStatus"}, {"BILL_AMT5", "BillAmount"}, {"PAY_AMT5", "PaidAmount"}}
+				    ),
+				    Month5Tagged = Table.AddColumn(Table.AddColumn(Table.AddColumn(Month5, "MonthNumber", each 5, Int64.Type), "MonthLabel", each "May/2005", type text), "ReferenceMonth", each #date(2005, 5, 1), type date),
+				
+				    Month6 = Table.RenameColumns(
+				        Table.SelectColumns(Base, {"ID", "EDUCATION", "PAY_6", "BILL_AMT6", "PAY_AMT6"}),
+				        {{"PAY_6", "PaymentStatus"}, {"BILL_AMT6", "BillAmount"}, {"PAY_AMT6", "PaidAmount"}}
+				    ),
+				    Month6Tagged = Table.AddColumn(Table.AddColumn(Table.AddColumn(Month6, "MonthNumber", each 6, Int64.Type), "MonthLabel", each "April/2005", type text), "ReferenceMonth", each #date(2005, 4, 1), type date),
+				
+				    Combined = Table.Combine({Month1Tagged, Month2Tagged, Month3Tagged, Month4Tagged, Month5Tagged, Month6Tagged}),
+				    WithDaysLate = Table.AddColumn(Combined, "DaysLate", each if [PaymentStatus] > 0 then [PaymentStatus] * 30 else 0, Int64.Type),
+				    WithOutstanding = Table.AddColumn(WithDaysLate, "OutstandingAmount", each if [PaymentStatus] > 0 then List.Max({[BillAmount] - [PaidAmount], 0}) else 0, type number),
+				    Renamed = Table.RenameColumns(WithOutstanding, {{"ID", "ClientID"}}),
+				    WithClientName = Table.AddColumn(Renamed, "ClientName", each "Client " & Text.PadStart(Text.From([ClientID]), 6, "0"), type text),
+				    Filtered = Table.SelectRows(WithClientName, each [PaymentStatus] > 0),
+				    FinalColumns = Table.SelectColumns(Filtered, {"ClientID", "ClientName", "EDUCATION", "MonthNumber", "MonthLabel", "ReferenceMonth", "PaymentStatus", "BillAmount", "PaidAmount", "DaysLate", "OutstandingAmount"})
+				in
+				    FinalColumns
+
+	annotation PBI_ResultType = Table
+

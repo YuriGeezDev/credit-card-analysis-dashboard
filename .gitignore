@@ -1,0 +1,9 @@
+# Power BI local cache / machine-specific settings (auto-regenerated on open)
+**/.pbi/
+
+# Power BI Desktop lock file
+~$*.pbip
+
+# OS junk
+.DS_Store
+Thumbs.db

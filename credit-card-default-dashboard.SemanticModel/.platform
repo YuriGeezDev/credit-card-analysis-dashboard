@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Credit Card Default Dashboard"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "4370822a-766d-427e-901a-40720c98b0f5"
+  }
+}

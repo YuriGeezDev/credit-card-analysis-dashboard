@@ -1,0 +1,72 @@
+table Top50Clients
+	lineageTag: d8086c26-ed64-4107-8ede-db5a3eac4fd4
+
+	measure 'Total Outstanding (Top 50)' = SUM(Top50Clients[TotalOutstanding])
+		formatString: "NT$" #,##0
+		lineageTag: 3116d417-ede1-4801-b169-b73683a1ea6b
+
+	measure 'Delinquent Clients (Top 50)' = COUNTROWS(Top50Clients)
+		formatString: #,##0
+		lineageTag: 4930e162-ce26-4db1-8022-4d092a0a4ab7
+
+	measure 'Max Days Late' = MAX(Top50Clients[MaxDaysLate])
+		formatString: #,##0
+		lineageTag: e999ec1f-5b42-4eee-9fb9-39190b3a0472
+
+	column ClientID
+		dataType: int64
+		formatString: 0
+		lineageTag: 7373724f-a05b-4148-8e01-50ffd75c1268
+		summarizeBy: none
+		sourceColumn: ClientID
+
+	column ClientName
+		dataType: string
+		lineageTag: f36fae6d-086c-479b-b277-280390677e9d
+		summarizeBy: none
+		sourceColumn: ClientName
+
+	column EDUCATION
+		dataType: int64
+		formatString: 0
+		lineageTag: 3f0b82e0-88c2-4df1-9f12-37b1f8bc0562
+		summarizeBy: none
+		sourceColumn: EDUCATION
+
+	column OverdueCount
+		dataType: int64
+		formatString: 0
+		lineageTag: cf991ab0-7c39-473b-b0dc-d07f67c24260
+		summarizeBy: none
+		sourceColumn: OverdueCount
+
+	column MaxDaysLate
+		dataType: int64
+		formatString: 0
+		lineageTag: 59218678-a003-4960-ae07-6c956fffd295
+		summarizeBy: none
+		sourceColumn: MaxDaysLate
+
+	column TotalOutstanding
+		dataType: double
+		formatString: "NT$" #,##0
+		lineageTag: 1116789b-4858-485f-b439-20eb719d7ac2
+		summarizeBy: none
+		sourceColumn: TotalOutstanding
+
+	partition Top50Clients = m
+		mode: import
+		source =
+				let
+				    Grouped = Table.Group(OverduePayments, {"ClientID", "ClientName", "EDUCATION"}, {
+				        {"OverdueCount", each Table.RowCount(_), Int64.Type},
+				        {"MaxDaysLate", each List.Max(_[DaysLate]), Int64.Type},
+				        {"TotalOutstanding", each List.Sum(_[OutstandingAmount]), type number}
+				    }),
+				    Sorted = Table.Sort(Grouped, {{"TotalOutstanding", Order.Descending}}),
+				    Top50 = Table.FirstN(Sorted, 50)
+				in
+				    Top50
+
+	annotation PBI_ResultType = Table
+

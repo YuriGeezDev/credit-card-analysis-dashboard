@@ -1,0 +1,25 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["Clients","OverduePayments","Top50Clients","Top50OverduePayments","DimEducation"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Clients
+ref table OverduePayments
+ref table Top50Clients
+ref table Top50OverduePayments
+ref table DimClient
+ref table DimEducation
+
+ref cultureInfo en-US
+
+ref expression ProjectFolder
+

@@ -1,0 +1,24 @@
+relationship OverduePayments_ClientID_DimClient_ClientID
+	fromColumn: OverduePayments.ClientID
+	toColumn: DimClient.ClientID
+
+relationship OverduePayments_EDUCATION_DimEducation_EDUCATION
+	fromColumn: OverduePayments.EDUCATION
+	toColumn: DimEducation.EDUCATION
+
+relationship Top50Clients_ClientID_DimClient_ClientID
+	fromColumn: Top50Clients.ClientID
+	toColumn: DimClient.ClientID
+
+relationship Top50Clients_EDUCATION_DimEducation_EDUCATION
+	fromColumn: Top50Clients.EDUCATION
+	toColumn: DimEducation.EDUCATION
+
+relationship Top50OverduePayments_ClientID_DimClient_ClientID
+	fromColumn: Top50OverduePayments.ClientID
+	toColumn: DimClient.ClientID
+
+relationship Top50OverduePayments_EDUCATION_DimEducation_EDUCATION
+	fromColumn: Top50OverduePayments.EDUCATION
+	toColumn: DimEducation.EDUCATION
+
